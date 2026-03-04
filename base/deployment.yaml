@@ -14,8 +14,12 @@ spec:
     spec:
       containers:
       - name: my-app
-        image: quay.io/libpod/alpine:latest # Simple placeholder image
-        command: ["/bin/sh", "-c", "while true; do echo hello; sleep 10; done"]
+        image: quay.io/libpod/alpine:latest
+        # This command now prints the variable
+        command: ["/bin/sh", "-c", "while true; do echo \"hello - i am ${ENV_NAME}\"; sleep 10; done"]
+        env:
+        - name: ENV_NAME
+          value: "unconfigured" # Default value
         resources:
           requests:
             memory: "64Mi"

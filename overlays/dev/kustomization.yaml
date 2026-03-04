@@ -1,6 +1,18 @@
 resources:
   - ../../base
 namePrefix: dev-
+
+# 1. This updates the image tag
 images:
   - name: quay.io/libpod/alpine
-    newTag: latest # You will change this during the demo
+    newTag: "3.18" # Update this tag during the demo to show promotion
+
+# 2. This injects the "dev" identity into the pod
+patches:
+  - target:
+      kind: Deployment
+      name: my-app
+    patch: |-
+      - op: replace
+        path: /spec/template/spec/containers/0/env/0/value
+        value: "dev"
