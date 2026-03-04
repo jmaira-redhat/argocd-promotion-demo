@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# Usage: ./promote.sh [target_env] [new_tag]
-# Example: ./promote.sh test 9.5
-
 TARGET_ENV=$1
 NEW_TAG=$2
 REGISTRY="registry.access.redhat.com/ubi9/ubi-minimal"
@@ -21,10 +18,13 @@ fi
 
 echo "Promoting ${TARGET_ENV} to version ${NEW_TAG}..."
 
-# 1. Update the newTag line
-sed -i "s/newTag: \".*\"/newTag: \"${NEW_TAG}\"/" $FILE
+# Check if we are on macOS or Linux to handle 'sed -i' correctly
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  sed -i "" "s/newTag: \".*\"/newTag: \"${NEW_TAG}\"/" $FILE
+  sed -i "" "s|value: \"${REGISTRY}:.*\"|value: \"${REGISTRY}:${NEW_TAG}\"|" $FILE
+else
+  sed -i "s/newTag: \".*\"/newTag: \"${NEW_TAG}\"/" $FILE
+  sed -i "s|value: \"${REGISTRY}:.*\"|value: \"${REGISTRY}:${NEW_TAG}\"|" $FILE
+fi
 
-# 2. Update the IMAGE_INFO patch value line
-sed -i "s|value: \"${REGISTRY}:.*\"|value: \"${REGISTRY}:${NEW_TAG}\"|" $FILE
-
-echo "Done! Review changes and commit."
+echo "Done! Check your $FILE now."
