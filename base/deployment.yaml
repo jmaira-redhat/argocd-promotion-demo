@@ -14,12 +14,13 @@ spec:
     spec:
       containers:
       - name: my-app
-        image: quay.io/libpod/alpine:latest
-        # This command now prints the variable
-        command: ["/bin/sh", "-c", "while true; do echo \"hello - i am ${ENV_NAME}\"; sleep 10; done"]
+        image: quay.io/libpod/alpine # Kustomize will replace this
+        command: ["/bin/sh", "-c", "while true; do echo \"hello - i am ${ENV_NAME}, i been served using the image : ${IMAGE_INFO}\"; sleep 10; done"]
         env:
         - name: ENV_NAME
-          value: "unconfigured" # Default value
+          value: "default"
+        - name: IMAGE_INFO
+          value: "unknown"
         resources:
           requests:
             memory: "64Mi"
