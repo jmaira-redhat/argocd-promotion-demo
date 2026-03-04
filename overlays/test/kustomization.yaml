@@ -6,7 +6,7 @@ namePrefix: dev-
 images:
   - name: quay.io/libpod/alpine
     newName: registry.access.redhat.com/ubi9/ubi-minimal
-    newTag: "9.4" # Update this tag during the demo to show promotion
+    newTag: "9.3"
 
 # 2. This injects the "dev" identity into the pod
 patches:
