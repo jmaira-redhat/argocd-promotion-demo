@@ -1,0 +1,6 @@
+resources:
+  - deployment.yaml
+images:
+  - name: quay.io/libpod/alpine
+    newName: quay.io/libpod/alpine
+    newTag: latest
