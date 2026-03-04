@@ -42,3 +42,21 @@ Once verified in Dev, "promote" the version by copying the newTag and IMAGE_INFO
 
 This ensures that the exact same container image version tested in Dev is what moves into production, fulfilling the core promise of GitOps.
 
+
+## 🛠 Automation Script
+
+To simplify the demo, use the included `promote.sh` script to update environment tags and log strings simultaneously.
+
+**Usage:**
+```bash
+./promote.sh [dev|test|prod] [tag]
+
+
+Example (Promoting Dev to 9.5):
+
+Bash
+./promote.sh dev 9.5
+git add .
+git commit -m "feat: upgrade dev to 9.5"
+git push origin main
+
