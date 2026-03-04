@@ -1,0 +1,6 @@
+resources:
+  - ../../base
+namePrefix: prod-
+images:
+  - name: quay.io/libpod/alpine
+    newTag: latest
