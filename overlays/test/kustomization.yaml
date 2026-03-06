@@ -6,7 +6,7 @@ namePrefix: test-
 images:
   - name: quay.io/libpod/alpine
     newName: registry.access.redhat.com/ubi9/ubi-minimal
-    newTag: "9.2"
+    newTag: "9.5"
 
 # 2. This injects the "dev" identity into the pod
 patches:
@@ -19,4 +19,4 @@ patches:
         value: "test"
       - op: replace
         path: /spec/template/spec/containers/0/env/1/value
-        value: "registry.access.redhat.com/ubi9/ubi-minimal:9.2"
+        value: "registry.access.redhat.com/ubi9/ubi-minimal:9.5"
